@@ -1,8 +1,8 @@
-# Kubernetes Webhook Token Authenticator for GitHub
+# Kubernetes Webhook Token Authenticator for GitLab
 
 This project implements a Kubernetes [Webhook Token
 Authenticator](https://kubernetes.io/docs/admin/authentication/#webhook-token-authentication)
-for authenticating users using GitHub Personal Access Token.
+for authenticating users using GitHub Personal Access Token. Based on [GitHub authenticator](https://github.com/oursky/kubernetes-github-authn)
 
 When user
 tries to authenticate to the Kubernetes API, the Kubernetes apiserver
@@ -22,13 +22,13 @@ authenticator on your Kubernetes master using host networking so that the
 apiserver can access the authenticator through the loopback interface.
 
 ```
-kubectl create -f https://raw.githubusercontent.com/oursky/kubernetes-github-authn/master/manifests/github-authn.yaml
+kubectl create -f manifests/gitlab-authn.yaml
 ```
 
 Confirm that the authenticator is running:
 
 ```
-kubectl get ds -l k8s-app=github-authn -n kube-system
+kubectl get ds -l k8s-app=gitlab-authn -n kube-system
 ```
 
 Next, configure apiserver to verify bearer token using this authenticator.
@@ -60,7 +60,7 @@ access to the project `project1`. First of all, we need to define a new role
 called `admin` which can control all resources.
 
 ```
-kubectl create -f https://raw.githubusercontent.com/oursky/kubernetes-github-authn/master/manifests/admin-cluster-role.yaml
+kubectl create -f manifests/admin-cluster-role.yaml
 ```
 
 We need to assign `johndoe` to this `admin` role so that he has control to
