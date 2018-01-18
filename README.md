@@ -2,12 +2,12 @@
 
 This project implements a Kubernetes [Webhook Token
 Authenticator](https://kubernetes.io/docs/admin/authentication/#webhook-token-authentication)
-for authenticating users using GitHub Personal Access Token. Based on [GitHub authenticator](https://github.com/oursky/kubernetes-github-authn)
+for authenticating users using GitLab Personal Access Token. Based on [GitHub authenticator](https://github.com/oursky/kubernetes-github-authn)
 
 When user
 tries to authenticate to the Kubernetes API, the Kubernetes apiserver
 calls this authenticator to verify the bearer token. This authenticator checks
-if the access token is valid using GitHub API and returns the GitHub username
+if the access token is valid using GitLap API and returns the GitLab username
 to apiserver.
 
 You should configure Kubernetes apiserver with an [authorization
@@ -17,9 +17,11 @@ Kubernetes resources can a user access.
 ## How to use
 
 First of all, you need to run the authenticator using the example [DaemonSet
-manifest](manifests/github-authn.yaml). It is recommended to run the
+manifest](manifests/gitlab-authn.yaml). It is recommended to run the
 authenticator on your Kubernetes master using host networking so that the
 apiserver can access the authenticator through the loopback interface.
+
+Add the Gitlab URL as env parameter to the gitlab deployment: GITLAB_URL=http://gitlab.url
 
 ```
 kubectl create -f manifests/gitlab-authn.yaml
